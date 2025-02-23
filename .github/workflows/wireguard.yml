@@ -12,6 +12,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wireguard
+          sudo touch /etc/wireguard/wg1.conf
 
       - name: Configure WireGuard
         run: |
