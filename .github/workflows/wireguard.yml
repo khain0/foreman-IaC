@@ -25,7 +25,9 @@ jobs:
           echo "Endpoint = ${{ secrets.WIREGUARD_SERVER_ENDPOINT }}" >> wg1.conf
           echo "AllowedIPs = ${{ secrets.WIREGUARD_SERVER_ALLOWED_IPS }}" >> wg1.conf
           sudo wg-quick up wg1
-
+      - name: Print Wireguard config
+        run: |
+          sudo cat /etc/wireguard/wg1.conf
       - name: Test Connection
         run: |
           ping -c 4 10.9.0.1
