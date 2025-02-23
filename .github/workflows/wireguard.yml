@@ -12,7 +12,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wireguard
-          sudo touch /etc/wireguard/wg0.conf
 
       - name: Configure WireGuard
         run: |
@@ -27,7 +26,7 @@ jobs:
           sudo wg-quick up wg0
       - name: Print Wireguard config
         run: |
-          sudo cat /etc/wireguard/wg0.conf
+          sudo cat wg0.conf 
       - name: Test Connection
         run: |
           ping -c 4 10.9.0.1
