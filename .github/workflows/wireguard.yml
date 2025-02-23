@@ -34,3 +34,6 @@ jobs:
       - name: Wireguard Down
         run: |
           sudo wg-quick down wg0
+      - name: Show Wireguard status
+        run: |
+          sudo wg show wg0
