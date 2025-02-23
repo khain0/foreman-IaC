@@ -28,12 +28,13 @@ jobs:
       - name: Print Wireguard config
         run: |
           sudo cat /etc/wireguard/wg0.conf | tee /dev/stderr
+      - name: Show Wireguard status
+        run: |
+          sudo wg show wg0
       - name: Test Connection
         run: |
           ping -c 4 10.9.0.1
       - name: Wireguard Down
         run: |
           sudo wg-quick down wg0
-      - name: Show Wireguard status
-        run: |
-          sudo wg show wg0
+
