@@ -1,9 +1,7 @@
 name: Set up WireGuard Connection
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   wireguard:
@@ -11,8 +9,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
     - name: Set up WireGuard Connection
       uses: niklaskeerl/easy-wireguard-action@v2
       with:
         WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+    - name: Start connection WireGuard
+      run: |
+        sudo wg-quick up wg0
+    - name: Test Connection
+      run: |
+        ping -c 4 10.9.0.1
