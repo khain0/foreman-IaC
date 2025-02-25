@@ -14,6 +14,8 @@ jobs:
       - run: sudo ip address add dev wg0 "${{ secrets.WIREGUARD_CLIENT_ADDRESS }}"
 
       - run: echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
+
+      - run: sudo chmod 600 wg0.conf
           
       - run: sudo wg-quick up ./wg0.conf
 
