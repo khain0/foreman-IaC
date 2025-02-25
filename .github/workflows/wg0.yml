@@ -13,9 +13,13 @@ jobs:
 
       - run: sudo ip address add dev wg0 "${{ secrets.WIREGUARD_CLIENT_ADDRESS }}"
 
-      - run: sudo wg set wg0 listen-port 48123 private-key "${{ secrets.WIREGUARD_CLIENT_PRIVATE_KEY }}" peer "${{ secrets.WIREGUARD_SERVER_PUBLIC_KEY }}" allowed-ips 0.0.0.0/0 endpoint "${{ secrets.WIREGUARD_SERVER_ENDPOINT }}"
+      - run: echo "${{ secrets.WG_CONFIG_FILE }}" > myconfig.conf
+
+      - run: wg setconf wg0 myconfig.conf
 
       - run: sudo ip link set up dev wg0
+
+      - run: ping -c 4 10.9.0.1
 
       - run: curl -vvv -m 30 http://192.168.11.136
 
