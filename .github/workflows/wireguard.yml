@@ -19,4 +19,7 @@ jobs:
           sudo wg-quick up ./wg0.conf
           ping -c 4 10.9.0.1
           sudo wg-quick down wg0
+          ping -c 4 10.9.0.1
+          curl -vvv -m 30 http://192.168.11.136
+          sudo wg-quick down wg0
         shell: bash
