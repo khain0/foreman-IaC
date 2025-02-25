@@ -13,14 +13,9 @@ jobs:
 
       - run: sudo ip address add dev wg0 "${{ secrets.WIREGUARD_CLIENT_ADDRESS }}"
 
-      - run: |
-          cat >> myconfig.conf<< EOF
-          "${{ secrets.WG_CONFIG_FILE }}"
-          EOF
+      - run: echo "${{ secrets.WG_CONFIG_FILE }}" > wg0.conf
           
-      - run: wg setconf wg0 myconfig.conf
-
-      - run: sudo ip link set up dev wg0
+      - run: sudo wg-quick up ./wg0.conf
 
       - run: ping -c 4 10.9.0.1
 
