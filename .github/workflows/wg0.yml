@@ -14,7 +14,7 @@ jobs:
       - run: sudo ip address add dev wg0 "${{ secrets.WIREGUARD_CLIENT_ADDRESS }}"
 
       - run: |
-          cat >> /path/to/existingFile.text<< EOF
+          cat >> myconfig.conf<< EOF
           "${{ secrets.WG_CONFIG_FILE }}"
           EOF
           
