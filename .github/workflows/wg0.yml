@@ -19,6 +19,6 @@ jobs:
 
       - run: sudo ip link set up dev wg0
 
-      - run: curl -vvv http://192.168.11.136
+      - run: curl -vvv -m 30 http://192.168.11.136
 
       - run: sudo wg-quick down wg0
