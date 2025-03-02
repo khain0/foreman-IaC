@@ -16,6 +16,7 @@ jobs:
           sudo wg set wg0 listen-port 48123 private-key privatekey peer "${{ secrets.WIREGUARD_SERVER_PUBLIC_KEY }}" allowed-ips 0.0.0.0/0 endpoint "${{ secrets.WIREGUARD_SERVER_ENDPOINT }}"
           sudo ip link set up dev wg0
           sudo ip route add 192.168.11.0/24 dev wg0
+          sudo mkdir -p /etc/resolvconf/resolv.conf.d
           sudo echo "nameserver 192.168.11.102" > /etc/resolvconf/resolv.conf.d/head
           sudo resolvconf -u
           cat /etc/resolv.conf
