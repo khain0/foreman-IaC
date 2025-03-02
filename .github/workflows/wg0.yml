@@ -13,6 +13,7 @@ jobs:
           echo "${{ secrets.WIREGUARD_CLIENT_PRIVATE_KEY }}" > privatekey
           sudo ip link add dev wg0 type wireguard
           sudo ip address add dev wg0 "${{ secrets.WIREGUARD_CLIENT_ADDRESS }}"
+          sudo ip route add 192.168.11.0/24 dev wg0
           sudo wg set wg0 listen-port 48123 private-key privatekey peer "${{ secrets.WIREGUARD_SERVER_PUBLIC_KEY }}" allowed-ips 0.0.0.0/0 endpoint "${{ secrets.WIREGUARD_SERVER_ENDPOINT }}"
           sudo ip link set up dev wg0
           ping -c 4 10.9.0.1
