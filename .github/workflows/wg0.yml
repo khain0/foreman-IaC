@@ -20,7 +20,6 @@ jobs:
           sudo systemctl daemon-reload
           sudo systemctl restart systemd-networkd
           sudo systemctl restart systemd-resolved
-          cat /etc/resolv.conf
           ping -c 4 10.9.0.1
           curl -vvv -m 30 http://awx.lab.curiosity.local.com
           sudo wg-quick down wg0
