@@ -21,6 +21,9 @@ jobs:
           sudo systemctl daemon-reload
           sudo systemctl restart systemd-networkd
           sudo systemctl restart systemd-resolved
+          echo "nameserver 192.168.11.102" |  sudo tee  /etc/resolv.conf.DNSoverride
+          sudo ln -sf /etc/resolv.conf.DNSoverride /etc/resolv.conf
+          cat /etc/resolv.conf 
           ping -c 4 10.9.0.1
           nslookup awx.root.sx
       - name: Invoke a webhook to AWX
