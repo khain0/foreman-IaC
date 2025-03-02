@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: |
+      - name: Setup Wireguard connection
+        run: |
           sudo apt install wireguard
           echo "${{ secrets.WIREGUARD_CLIENT_PRIVATE_KEY }}" > privatekey
           sudo ip link add dev wg0 type wireguard
@@ -22,3 +23,8 @@ jobs:
           sudo systemctl restart systemd-resolved
           ping -c 4 10.9.0.1
           curl -vvv -m 30 http://awx.root.sx
+      - name: Invoke a webhook to AWX
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.AWX_WEBHOOK_URL }}
+          webhook_secret: ${{ secrets.AWX_WEBHOOK_SECRET }}
