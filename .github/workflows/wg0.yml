@@ -17,5 +17,5 @@ jobs:
           sudo ip link set up dev wg0
           sudo ip route add 192.168.11.0/24 dev wg0
           ping -c 4 10.9.0.1
-          curl -vvv -m 30 http://192.168.11.136
+          curl -vvv -m 30 http://awx.lab.curiosity.local.com
           sudo wg-quick down wg0
