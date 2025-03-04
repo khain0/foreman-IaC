@@ -1,4 +1,4 @@
-name: WireGuard wg0
+name: Webhook to AWX
 
 on:
   workflow_dispatch:
