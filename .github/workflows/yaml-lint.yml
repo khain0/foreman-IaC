@@ -1,5 +1,6 @@
 ---
 name: YAML Syntax Check
+run-name: Commit on branch ${{ github.ref_name }} by @${{ github.actor }}
 
 on:
   push:
