@@ -1,11 +1,11 @@
 ---
-name: YAML Syntax Check
+name: YAML-lint
 run-name: Commit on branch ${{ github.ref_name }} by @${{ github.actor }}
 
 on:
   push:
     branches:
-      - main
+      - 'main'
   pull_request:
     types: [opened, edited, reopened, synchronize]
   workflow_dispatch:
@@ -21,20 +21,14 @@ on:
           - debug
 
 jobs:
-  yaml-lint:
+  YAML-lint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: 'Yamllint'
+        uses: karancode/yamllint-github-action@master
         with:
-          python-version: '3.x'
-
-      - name: Install yamllint
-        run: pip install yamllint
-
-      - name: Run yamllint
-        run: yamllint -c .github/yaml-config.yml .
+          yamllint_file_or_dir: .
+          yamllint_comment: true
+          yamllint_config_filepath: .github/yamllint.yml
